@@ -99,32 +99,40 @@ int main()
     inputFile.close();
     cout << "SUMMARY:" << endl;
     cout << "Keywords: " << keywordsCount << endl;
+    cout << "list of keywords: ";
     // for loop for printing keyarr
     for (int i = 0; i < keywordsCount; i++)
     {
         cout << keyarr[i] << endl;
     }
-    cout << endl;
+    cout << " \n " << endl;
 
     cout << "Identifiers: " << identifiersCount << endl;
+    cout << "list of identifiers: ";
     // for loop for printing idarr
     for (int i = 0; i < identifiersCount; i++)
     {
         cout << idarr[i] << endl;
     }
+    cout << " \n " << endl;
     cout << "Operators: " << operatorsCount << endl;
+    cout << "list of operators: ";
     // for loop for printing oparr
     for (int i = 0; i < operatorsCount; i++)
     {
         cout << oparr[i] << endl;
     }
+    cout << " \n " << endl;
     cout << "Symbols: " << symbolsCount << endl;
+    cout << "list of symbols: ";
     // for loop for printing symarr
     for (int i = 0; i < symbolsCount; i++)
     {
         cout << symarr[i] << endl;
     }
+    cout << " \n " << endl;
     cout << "Constants: " << constantsCount << endl;
+    cout << "list of constants: ";
     // for loop for printing conarr
     for (int i = 0; i < constantsCount; i++)
     {
