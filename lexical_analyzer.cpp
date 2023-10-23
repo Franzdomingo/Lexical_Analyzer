@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <regex>
 #include <sstream>
 #include <vector>
 #include <cctype>
@@ -11,14 +12,31 @@ using namespace std;
 // Function to check if a token is a keyword
 bool isKeyword(const string &token)
 {
-    unordered_set<string> keywords = {"int", "float", "return", "cout", "main", "using", "namespace", "std",
-                                      "include", "iostream", "auto", "break", "case", "char", "const", "continue",
-                                      "default", "do", "double", "else", "enum", "extern",
-                                      "float", "for", "goto", "if", "int", "long", "register",
-                                      "return", "short", "signed", "sizeof", "static", "struct",
-                                      "switch", "typedef", "union", "unsigned", "void", "volatile",
-                                      "while"};
+    unordered_set<string> keywords = {"auto", "bool", "break", "case", "catch", "char","class","const", 
+                                      "continue", "default", "delete", "do", "double", "else", "enum", 
+                                      "extern", "float", "for", "goto", "if", "int", "include", "inline", 
+                                      "iostream", "long", "main", "namespace", "register","return", "short", 
+                                      "signed", "sizeof", "static", "std", "struct", "switch", "typedef", 
+                                      "template", "typename", "try", "this" "union", "using", "unsigned", 
+                                      "void", "volatile", "virtual", "while"};
     return keywords.count(token) > 0;
+}
+
+bool isOperator(const string &token){
+    unordered_set<string> operators = {"+", "-", "*", "/", "%", "==", "!=", "<=", ">=", "&&", "||", "!", "=",
+                                       "+=", "-=", "/=", "*=", "++", "--", "&", "|", "^", "~", "<<", ">>", "::"};
+
+    return operators.count(token) > 0;
+}
+
+bool isConstant(const string &token){
+    regex characterConstant("'.'");
+    regex stringConstant("\".*\"");
+    regex integerConstant("^\\d+$");
+    regex floatingPointConstant("^[+-]?\\d*\\.\\d+$");
+
+    return (regex_match(token, characterConstant) || regex_match(token, stringConstant) ||
+            regex_match(token, integerConstant) || regex_match(token, floatingPointConstant));
 }
 
 int main()
@@ -66,12 +84,19 @@ int main()
                 // push token to array
                 idarr[identifiersCount] = token;
             }
-            else if (token == "+" || token == "-" || token == "=" || token == "/" || token == "<<")
+            else if (isOperator(token))
             {
                 operatorsCount++;
                 cout << token << " is an operator" << endl;
                 // push token to array
                 oparr[operatorsCount] = token;
+            }
+            else if (isConstant(token))
+            {
+                constantsCount++;
+                cout << token << " is a constant" << endl;
+                // push token to array
+                conarr[constantsCount] = token;
             }
             else if (ispunct(token[0]))
             {
@@ -80,13 +105,7 @@ int main()
                 // push token to array
                 symarr[symbolsCount] = token;
             }
-            else if (isdigit(token[0]))
-            {
-                constantsCount++;
-                cout << token << " is a constant" << endl;
-                // push token to array
-                conarr[constantsCount] = token;
-            }
+           
             cout << "Keywords: " << keywordsCount << endl;
             cout << "Identifiers: " << identifiersCount << endl;
             cout << "Operators: " << operatorsCount << endl;
