@@ -12,7 +12,7 @@ using namespace std;
 // Function to check if a token is a keyword
 bool isKeyword(const string &token)
 {
-    unordered_set<string> keywords = {"auto", "bool", "break", "case", "catch", "char","class","const", 
+    unordered_set<string> keywords = {"cout", "cin", "auto", "bool", "break", "case", "catch", "char","class","const", 
                                       "continue", "default", "delete", "do", "double", "else", "enum", 
                                       "extern", "float", "for", "goto", "if", "int", "include", "inline", 
                                       "iostream", "long", "main", "namespace", "register","return", "short", 
